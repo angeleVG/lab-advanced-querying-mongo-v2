@@ -21,7 +21,7 @@ limit: 20
 
 **3. All the companies founded between 2000 and 2005, both years included. Retrieve only the `name` and `founded_year` fields.**
 
-{$and: [{founded_year: {$gte: 2000}}, {founded_year:{$lte: 2005}}]}
+{founded_year: { $gte: 2000, $lte: 2005 }}
 project:{ name: 1, _id: 0 , founded_year: 1}
 
 <br>
@@ -41,7 +41,7 @@ project:{ name: 1, _id: 0 , founded_year: 1}
 
 **6. All the companies that have a null value on the `category_code` field.**
 
-{category_code: { $eq: null }}
+{category_code: { $type: null }}
 
 <br>
 
@@ -78,7 +78,9 @@ limit: 10
 
 **1. All the companies that have been acquired after 2010, order by the acquisition amount, and retrieve only their `name` and `acquisition` field.**
 
-<!-- Your Query Goes Here -->
+{"acquisition.acquired_year":{$gt: 2010}}
+project: {name: 1, _id: 0, acquisition: 1}
+sort: {"acquisition.price_amount": -1}
 
 <br>
 
